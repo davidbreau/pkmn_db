@@ -1,0 +1,1 @@
+from scrapy.spiders import CrawlSpider
