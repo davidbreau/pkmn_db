@@ -5,8 +5,6 @@
 
 import scrapy
 
-
-class A1ScrapingItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class Pokemon(scrapy.Item):
+    number = scrapy.Field()
+    name = scrapy.Field()

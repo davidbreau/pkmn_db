@@ -1,13 +1,25 @@
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+import csv, os
+from scrapy.exporters import CsvItemExporter
+from A1__Scraping.items import Pokemon
 
+class CsvPipeline:
+    def open_spider(self, spider):
+        file_name = 'pokemon_data.csv'
+        if not os.path.exists(file_name):
+            with open(file_name, 'w', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow(['Number', 'Name'])
 
-# useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
+        self.file = open(file_name, 'a', newline='')
+        self.exporter = CsvItemExporter(self.file)
+        self.exporter.start_exporting()
 
+    def close_spider(self, spider):
+        self.exporter.finish_exporting()
+        self.file.close()
 
-class A1ScrapingPipeline:
     def process_item(self, item, spider):
+        if isinstance(item, Pokemon):
+            self.exporter.export_item(item)
+        
         return item
