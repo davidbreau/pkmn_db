@@ -1,5 +1,5 @@
 -- EXECUTE THIS FILE TO CREATE DATABASE TABLES
--- RUN BASH COMMAND : sqlite3 2___Data/pkmn.db < 1___Database_Building/create_tables.sql
+-- RUN BASH COMMAND : sqlite3 B___Data/pkmn.db < 1___Database_Building/create_tables.sql
 
 -- ####################################################################################
 -- ################################### TABLES #########################################
