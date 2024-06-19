@@ -9,8 +9,7 @@
 CREATE TABLE IF NOT EXISTS Pokemons (
     nom_pkmn TEXT PRIMARY KEY,
     num_pokedex INTEGER,
-    generation INTEGER,
-    region TEXT,
+    url_image TEXT,
     type_1 TEXT,
     type_2 TEXT NULL, 
     taille_m FLOAT,

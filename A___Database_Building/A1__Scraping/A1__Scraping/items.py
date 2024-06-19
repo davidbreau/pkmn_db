@@ -1,11 +1,9 @@
 import scrapy
 
-
 class pokemonItem(scrapy.Item):
     nom_pkmn = scrapy.Field()
     num_pokedex = scrapy.Field()
-    generation = scrapy.Field()
-    region = scrapy.Field()
+    url_image = scrapy.Field()
     type_1 = scrapy.Field()
     type_2 = scrapy.Field()
     taille_M = scrapy.Field()
@@ -27,3 +25,4 @@ class pokemonItem(scrapy.Item):
     defense = scrapy.Field()
     defense_speciale = scrapy.Field()
     vitesse = scrapy.Field()
+    

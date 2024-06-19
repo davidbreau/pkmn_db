@@ -1,0 +1,10 @@
+nom_pkmn,num_pokedex,url_image,type_1,type_2,taille_m,poids_kg,talent_1,talent_2,talent_cache,sexe,taux_de_capture,cycle_eclosion,groupe_oeuf_1,groupe_oeuf_2,points_effort,point_exp,exp_niv100,pv,attaque,attaque_speciale,defense,defense_speciale,vitesse
+Bulbizarre,0001,/images/thumb/e/ef/Bulbizarre-RFVF.png/250px-Bulbizarre-RFVF.png,Plante,Poison,,,,,,,,,,,,,,,,,,,
+Tortank,0009,/images/thumb/2/24/Tortank-RFVF.png/250px-Tortank-RFVF.png,Eau,,,,,,,,,,,,,,,,,,,,
+Carabaffe,0008,/images/thumb/2/2a/Carabaffe-RFVF.png/250px-Carabaffe-RFVF.png,Eau,,,,,,,,,,,,,,,,,,,,
+Carapuce,0007,/images/thumb/c/cc/Carapuce-RFVF.png/250px-Carapuce-RFVF.png,Eau,,,,,,,,,,,,,,,,,,,,
+Dracaufeu,0006,/images/thumb/1/17/Dracaufeu-RFVF.png/250px-Dracaufeu-RFVF.png,Feu,Vol,,,,,,,,,,,,,,,,,,,
+Reptincel,0005,/images/thumb/6/64/Reptincel-RFVF.png/250px-Reptincel-RFVF.png,Feu,,,,,,,,,,,,,,,,,,,,
+Salamèche,0004,/images/thumb/8/89/Salam%C3%A8che-RFVF.png/250px-Salam%C3%A8che-RFVF.png,Feu,,,,,,,,,,,,,,,,,,,,
+Florizarre,0003,/images/thumb/4/42/Florizarre-RFVF.png/250px-Florizarre-RFVF.png,Plante,Poison,,,,,,,,,,,,,,,,,,,
+Herbizarre,0002,/images/thumb/4/44/Herbizarre-RFVF.png/250px-Herbizarre-RFVF.png,Plante,Poison,,,,,,,,,,,,,,,,,,,
