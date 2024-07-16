@@ -92,11 +92,14 @@ REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
-
-##### ADDED SETTINGS // Making easier crawls without blocking
 RANDOMIZE_DOWNLOAD_DELAY = True
 DOWNLOAD_DELAY = 1
 CONCURRENT_REQUESTS_PER_DOMAIN = 1
 COOKIES_ENABLED = False
 RETRY_TIMES = 3
 HTTPCACHE_ENABLED = True
+
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 400,
+}

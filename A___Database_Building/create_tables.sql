@@ -1,5 +1,5 @@
 -- EXECUTE THIS FILE TO CREATE DATABASE TABLES
--- RUN BASH COMMAND : sqlite3 B___Data/pkmn.db < 1___Database_Building/create_tables.sql
+-- RUN BASH COMMAND : sqlite3 B___Data/pkmn.db < A___Database_Building/create_tables.sql
 
 -- ####################################################################################
 -- ################################### TABLES #########################################
@@ -8,12 +8,13 @@
 -- POKEMON
 CREATE TABLE IF NOT EXISTS Pokemons (
     nom_pkmn TEXT PRIMARY KEY,
+    nom_pkmn_us TEXT,
     num_pokedex INTEGER,
     url_image TEXT,
     type_1 TEXT,
     type_2 TEXT NULL, 
-    taille_m FLOAT,
-    poids_kg FLOAT,
+    taille_m TEXT,
+    poids_kg TEXT,
     talent_1 TEXT,
     talent_2 TEXT NULL,
     talent_cache TEXT NULL,

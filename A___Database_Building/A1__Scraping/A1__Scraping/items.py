@@ -2,11 +2,12 @@ import scrapy
 
 class pokemonItem(scrapy.Item):
     nom_pkmn = scrapy.Field()
+    nom_pkmn_us = scrapy.Field()
     num_pokedex = scrapy.Field()
     url_image = scrapy.Field()
     type_1 = scrapy.Field()
     type_2 = scrapy.Field()
-    taille_M = scrapy.Field()
+    taille_m = scrapy.Field()
     poids_kg = scrapy.Field()
     talent_1 = scrapy.Field()
     talent_2 = scrapy.Field()
@@ -17,7 +18,7 @@ class pokemonItem(scrapy.Item):
     groupe_oeuf_1 = scrapy.Field()
     groupe_oeuf_2 = scrapy.Field()
     points_effort = scrapy.Field()
-    point_exp = scrapy.Field()
+    points_exp = scrapy.Field()
     exp_niv100 = scrapy.Field()
     pv = scrapy.Field()
     attaque = scrapy.Field()

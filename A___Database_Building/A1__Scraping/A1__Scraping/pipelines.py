@@ -9,6 +9,7 @@ class A1ScrapingPipeline:
         self.csvfile = open('poketest.csv', mode='w', newline='', encoding='utf-8')
         self.fieldnames = [
             'nom_pkmn',
+            'nom_pkmn_us',
             'num_pokedex',
             'url_image',
             'type_1', 
@@ -24,7 +25,7 @@ class A1ScrapingPipeline:
             'groupe_oeuf_1', 
             'groupe_oeuf_2',
             'points_effort', 
-            'point_exp', 
+            'points_exp', 
             'exp_niv100', 
             'pv', 
             'attaque', 
