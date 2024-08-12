@@ -1,4 +1,4 @@
-VENV_DIR="venv_pkmn"
+VENV_DIR="venv"
 
 if [ -d "$VENV_DIR" ]; then
     echo "$VENV_DIR existing. activating ..."
@@ -12,6 +12,7 @@ else
         source $VENV_DIR/bin/activate
         echo "now installing dependencies ..."
         pip install -r requirements.txt
+        pip install --upgrade pip
     else
         echo "$VENV_DIR creation failed"
         exit 1
