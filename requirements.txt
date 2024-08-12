@@ -1,0 +1,4 @@
+ipykernel
+scrapy
+scrapy-fake-useragent
+python-dotenv
