@@ -38,7 +38,7 @@ class PokemonSpider(CrawlSpider):
         """
         
         links = response.css('tr td[id] > a::attr(href)').getall()
-        for link in links[0:15]: ###### 🚨🚨🚨 Retirer [-:-] pour tout scraper
+        for link in links: ###### 🚨🚨🚨 Retirer/Mettre [-:-] pour tout tester le scrap ou lancer le tout
             yield response.follow(link, callback=self.parse_pokemon)
             
             
@@ -59,7 +59,7 @@ class PokemonSpider(CrawlSpider):
 ######🔽 À chaque page de monstre, récupère chaque information précise et les stocks dans des variables
         nom_pkmn = response.css("th.entêtesection::text").get()
         nom_pkmn_us = response.css('th:contains("Nom anglais") + td::text').get()
-        num_pokedex = response.css('span.explain[title="Numérotation nationale"]::text').re(r'№ (\d+)')[0].zfill(4)
+        num_pokedex = response.css('span.explain[title="Numérotation nationale"]::text').get()[-4:] #.re(r'№ (\d+)')[0].zfill(4)
         url_image = response.css('.mw-parser-output .illustration a img::attr(src)').get()
         type1 = response.css('tr > td[colspan="3"] > span[typeof="mw:File"]:nth-child(1) > a::attr(title)').get()
             #retourne 'Nomdutype (type)'
@@ -69,8 +69,9 @@ class PokemonSpider(CrawlSpider):
             type2 = type2.split()[0]
         except:
             type2 = None    
-        taille_m = response.css('th:contains("Taille") + td::text').get().split(' ')
+        taille_m = response.css('th:contains("Taille") + td::text').get()
         try:
+            taille_m = taille_m.split(' ')
             taille_m = [x for x in taille_m if x[0].isdigit()][0]
         except:
             taille_m = None
@@ -104,7 +105,7 @@ class PokemonSpider(CrawlSpider):
 ######🔽 Attribut chaque information à la caractéristique de l'item 
         pokemon['nom_pkmn'] = nom_pkmn
         pokemon['nom_pkmn_us'] = nom_pkmn_us
-        pokemon['num_pokedex'] = f"{int(num_pokedex):04d}" 
+        pokemon['num_pokedex'] = num_pokedex #f"{int(num_pokedex):04d}" 
         pokemon['url_image'] = url_image
         pokemon['type_1'] = type1
         pokemon['type_2'] = type2

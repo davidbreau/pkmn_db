@@ -50,7 +50,8 @@ import csv, os, sqlite3
 
 class PkmnPipeline:
     def __init__(self):
-        self.data_dir = '../../../B___Data'        
+        self.data_dir = '../../../B___Data'   
+        self.csv_dir = os.path.join(self.data_dir, 'CSV')    
         self.fieldnames_map = {
             'PokemonSpider': [
                 'nom_pkmn', 'nom_pkmn_us', 'num_pokedex', 'url_image', 'type_1', 
@@ -61,12 +62,12 @@ class PkmnPipeline:
                 'defense_speciale', 'vitesse'
             ]}
     
-        # self.conn = sqlite3.connect(os.path.join(self.data_dir, 'pkmn.db'))
-        # self.cursor = self.conn.cursor()   
+        self.conn = sqlite3.connect(os.path.join(self.data_dir, 'pkmn.db'))
+        self.cursor = self.conn.cursor()   
         
     def open_spider(self, spider):
         spider_name = spider.name.lower()
-        csv_filepath = os.path.join(self.data_dir, f"{spider_name[:-5]}.csv")
+        csv_filepath = os.path.join(self.csv_dir, f"{spider_name[:-5]}.csv")
         self.fieldnames = self.fieldnames_map.get(spider.name, [])
         
         # Supprime le fichier s'il existe avant d'ouvrir un nouveau fichier
@@ -79,38 +80,37 @@ class PkmnPipeline:
 
     def close_spider(self, spider):
         self.csvfile.close()
-        # self.conn.commit()
-        # self.conn.close()
+        self.conn.commit()
+        self.conn.close()
 
     def process_item(self, item, spider):
-        # if spider.name == 'PokemonSpider':
-        #     self.process_pokemon(item)
+        if spider.name == 'PokemonSpider':
+            self.process_pokemon(item)
 
-        # Écrit les données dans le fichier CSV
         self.writer.writerow(item)
         
         return item
  
-    # def process_pokemon(self, item):
-    #     self.cursor.execute('''
-    #         INSERT INTO Pokemons (
-    #             nom_pkmn, nom_pkmn_us, num_pokedex, url_image, type_1, 
-    #             type_2, taille_m, poids_kg, talent_1, talent_2, 
-    #             talent_cache, sexe, taux_de_capture, cycle_eclosion, 
-    #             groupe_oeuf_1, groupe_oeuf_2, points_effort, points_exp, 
-    #             exp_niv100, pv, attaque, attaque_speciale, defense, 
-    #             defense_speciale, vitesse
-    #         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    #     ''', (
-    #         item.get('nom_pkmn'), item.get('nom_pkmn_us'), item.get('num_pokedex'),
-    #         item.get('url_image'), item.get('type_1'), item.get('type_2'),
-    #         item.get('taille_m'), item.get('poids_kg'), item.get('talent_1'),
-    #         item.get('talent_2'), item.get('talent_cache'), item.get('sexe'),
-    #         item.get('taux_de_capture'), item.get('cycle_eclosion'),
-    #         item.get('groupe_oeuf_1'), item.get('groupe_oeuf_2'),
-    #         item.get('points_effort'), item.get('points_exp'), item.get('exp_niv100'),
-    #         item.get('pv'), item.get('attaque'), item.get('attaque_speciale'),
-    #         item.get('defense'), item.get('defense_speciale'), item.get('vitesse')
-    #     ))
+    def process_pokemon(self, item):
+        self.cursor.execute('''
+            INSERT INTO Pokemons (
+                nom_pkmn, nom_pkmn_us, num_pokedex, url_image, type_1, 
+                type_2, taille_m, poids_kg, talent_1, talent_2, 
+                talent_cache, sexe, taux_de_capture, cycle_eclosion, 
+                groupe_oeuf_1, groupe_oeuf_2, points_effort, points_exp, 
+                exp_niv100, pv, attaque, attaque_speciale, defense, 
+                defense_speciale, vitesse
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            item.get('nom_pkmn'), item.get('nom_pkmn_us'), item.get('num_pokedex'),
+            item.get('url_image'), item.get('type_1'), item.get('type_2'),
+            item.get('taille_m'), item.get('poids_kg'), item.get('talent_1'),
+            item.get('talent_2'), item.get('talent_cache'), item.get('sexe'),
+            item.get('taux_de_capture'), item.get('cycle_eclosion'),
+            item.get('groupe_oeuf_1'), item.get('groupe_oeuf_2'),
+            item.get('points_effort'), item.get('points_exp'), item.get('exp_niv100'),
+            item.get('pv'), item.get('attaque'), item.get('attaque_speciale'),
+            item.get('defense'), item.get('defense_speciale'), item.get('vitesse')
+        ))
 
-    #     return item
+        return item
