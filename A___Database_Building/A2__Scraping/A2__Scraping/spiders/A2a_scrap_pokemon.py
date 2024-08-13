@@ -77,15 +77,15 @@ class PokemonSpider(CrawlSpider):
         poids_kg = response.css('th:contains("Poids") + td::text').get().strip()
         talents = response.css('th:contains("Talent") + td a::text').getall()
         sexe = response.css('th:contains("Sexe") + td::text').get().replace('\xa0', ' ').replace('\u202f', '')
-        taux_de_capture = response.css('th:contains("Taux de capture") + td::text').get()
         try:
+            taux_de_capture = response.css('th:contains("Taux de capture") + td::text').get() 
             cycle_eclosion = response.css('th:contains("closion") + td::text').get().strip()
             groupes_oeufs = response.css('th:contains("Groupe") + td a::text').getall()
             points_effort = response.css('th:contains("effort") + td::text').get()
             point_exp = response.css('th:contains("exp.") + td::text').get()
             exp_niv100 = response.css('th:contains("niveau 100") + td::text').get()
         except:
-            cycle_eclosion, groupes_oeufs, points_effort, point_exp, exp_niv100 = None, None, None, None, None
+            taux_de_capture, cycle_eclosion, groupes_oeufs, points_effort, point_exp, exp_niv100 = None, None, None, None, None, None
         try:
             pv = response.css('td:contains("PV") + td::text').get().strip()
             attaque = response.css('td:contains("Attaque") + td::text').get().strip()

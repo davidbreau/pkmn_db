@@ -9,3 +9,5 @@ cd A___Database_Building/A2__Scraping/A2__Scraping
 echo "$(pwd)"
 
 scrapy crawl PokemonSpider
+
+cd ../../..
