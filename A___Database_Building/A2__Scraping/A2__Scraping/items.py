@@ -5,6 +5,7 @@ class pokemonItem(scrapy.Item):
     nom_pkmn_us = scrapy.Field()
     num_pokedex = scrapy.Field()
     url_image = scrapy.Field()
+    url_cri = scrapy.Field()
     type_1 = scrapy.Field()
     type_2 = scrapy.Field()
     taille_m = scrapy.Field()

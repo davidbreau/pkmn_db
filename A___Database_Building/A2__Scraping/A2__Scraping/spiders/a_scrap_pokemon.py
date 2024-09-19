@@ -59,8 +59,9 @@ class PokemonSpider(CrawlSpider):
 ######🔽 À chaque page de monstre, récupère chaque information précise et les stocks dans des variables
         nom_pkmn = response.css("th.entêtesection::text").get()
         nom_pkmn_us = response.css('th:contains("Nom anglais") + td::text').get()
-        num_pokedex = response.css('span.explain[title="Numérotation nationale"]::text').get()[-4:] #.re(r'№ (\d+)')[0].zfill(4)
+        num_pokedex = response.css('span.explain[title="Numérotation nationale"]::text').get() #.re(r'№ (\d+)')[0].zfill(4)
         url_image = response.css('.mw-parser-output .illustration a img::attr(src)').get()
+        url_cri = response.css('audio::attr(src)').get()
         type1 = response.css('tr > td[colspan="3"] > span[typeof="mw:File"]:nth-child(1) > a::attr(title)').get()
             #retourne 'Nomdutype (type)'
         type1 = type1.split()[0]
@@ -105,8 +106,9 @@ class PokemonSpider(CrawlSpider):
 ######🔽 Attribut chaque information à la caractéristique de l'item 
         pokemon['nom_pkmn'] = nom_pkmn
         pokemon['nom_pkmn_us'] = nom_pkmn_us
-        pokemon['num_pokedex'] = num_pokedex #f"{int(num_pokedex):04d}" 
+        pokemon['num_pokedex'] = num_pokedex[-4:] if num_pokedex else None #f"{int(num_pokedex):04d}" 
         pokemon['url_image'] = url_image
+        pokemon['url_cri'] = url_cri[18:]
         pokemon['type_1'] = type1
         pokemon['type_2'] = type2
         pokemon['taille_m'] = taille_m 

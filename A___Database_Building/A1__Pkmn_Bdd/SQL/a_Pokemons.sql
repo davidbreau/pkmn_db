@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS Pokemons (
     nom_pkmn_us TEXT,
     num_pokedex INTEGER,
     url_image TEXT,
+    url_cri TEXT,
     type_1 TEXT,
     type_2 TEXT NULL, 
     taille_m TEXT,

@@ -1,7 +1,7 @@
 # Lors du scrap, certaines exceptions n'ont pas vu leurs talents leurs formes correctement scrapés ou  (env. 49 sur 1051)
 # Ce script sert à les insérer à la main
 
-import sqlite3, pandas as pd
+import pandas as pd
 
 df = pd.read_csv('../../B___Data/CSV/pokemons.csv')
 
