@@ -1,6 +1,6 @@
 # Afficher le répertoire actuel pour le débogage
 
-source venv_pkmn/bin/activate
+source venv/bin/activate
 
 echo "Après cd vers le répertoire du script : $(pwd)"
 

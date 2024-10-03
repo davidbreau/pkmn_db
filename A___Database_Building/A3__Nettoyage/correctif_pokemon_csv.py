@@ -1,4 +1,4 @@
-# Lors du scrap, certaines exceptions n'ont pas vu leurs talents leurs formes correctement scrapés ou  (env. 49 sur 1051)
+# Lors du scrap, certaines exceptions n'ont pas vu leurs talents leurs formes correctement scrapés ou  (env. 100 sur 1051)
 # Ce script sert à les insérer à la main
 
 import pandas as pd
@@ -6,7 +6,7 @@ import pandas as pd
 df = pd.read_csv('../../B___Data/CSV/pokemons.csv')
 
 #Correction des url d'images pour raccourcir des éléments facultative comme aperçu et nombre de pixel
-df.url_image = df.url_image.apply(lambda x: '/images'+x.split('/thumb')[1].split('png/')[0]+'png' if '/thumb' in x else x.split('png/')[0]+'png')#
+df.url_image = df.url_image.apply(lambda x: '/images'+x.split('/thumb')[1].split('png/')[0]+'png' if '/thumb' in x else x.split('png/')[0]+'png')
 
 
 #
@@ -33,7 +33,7 @@ tauros_race_combattive = df.loc[df.nom_pkmn == 'Tauros'].assign(
     url_image='/images/9/9a/Tauros_de_Paldea_%28Race_Combative%29-EV.png',
     type_1='Combat',
     taille_m= 1.4, poids_kg=11.0,
-    talent_cache='Ruminant', points_xp='172 exp.',
+    talent_cache='Ruminant', points_exp='172 exp.',
     attaque=110, defense=105, attaque_speciale=30, vitesse=100
 )
 tauros_race_flamboyante = tauros_race_combattive.assign(
@@ -50,13 +50,16 @@ tauros_race_aquatique = tauros_race_combattive.assign(
 )
 
 
-
 #
 ##
-### N.75 Gravalanch
-df.loc[df.nom_pkmn == 'Gravalanch', ['talent_1', 'talent_2', 'talent_cache']] = [
-    'Tête de Roc', 'Fermeté', 'Voile Sable'
-    ]
+### N.150 Mewtwo
+mewtwo_blinde = df.loc[df.nom_pkmn == 'Mewtwo'].assign(
+    nom_pkmn='Mewtwo (Blindé)', nom_pkmn_us='Mewtwo (Armored)',
+    url_image='/images/e/ea/Sprite_0150_Armure_GO.png',
+    talent_1 = None, talent_2 = None, talent_cache = None,
+    taux_de_capture = None, points_effort = None, points_exp = None, exp_niv100 = None,
+    attaque=None, defense=None, attaque_speciale=None, defense_speciale=None, vitesse=None
+)
 
 
 #
@@ -65,6 +68,7 @@ df.loc[df.nom_pkmn == 'Gravalanch', ['talent_1', 'talent_2', 'talent_cache']] = 
 df.loc[df.nom_pkmn == 'Tengalice', ['talent_1', 'talent_2', 'talent_cache']] = [
     'Chlorophylle', 'Matinal (gen :8) / Aéroporté (gen 9:)', 'Pickpocket'
     ]
+
 
 
 #
@@ -347,6 +351,36 @@ bargantua_motif_bleu = df.loc[df.nom_pkmn == 'Bargantua (Motif Blanc)'].assign(
 
 #
 ##
+### N.555 Darumacho
+# Modification des formes existantes en Mode Normal
+df.loc[df.nom_pkmn == 'Darumacho', ['nom_pkmn', 'nom_pkmn_us']] = ['Darumacho (Normale)', 'Darmanitan (Standard)']
+# Ajout de la forme Mode Transe
+darumacho_transe = df.loc[df.nom_pkmn == 'Darumacho (Normale)'].assign(
+    nom_pkmn='Darumacho (Transe)',
+    nom_pkmn_us='Darmanitan (Zen)',
+    type_2='Psy',
+    url_image='/images/0/0a/Sprite_0555_Transe_HOME.png',
+    attaque=30,
+    defense=105,
+    attaque_speciale=140,
+    defense_speciale=105,
+    vitesse=55
+)
+
+# Ajout de la forme Mode Transe de Galar
+df.loc[df.nom_pkmn == 'Darumacho de Galar', ['nom_pkmn', 'nom_pkmn_us']] = ['Darumacho de Galar (Normale)', 'Galarian Darmanitan (Standard)']
+darumacho_galar_transe = df.loc[df.nom_pkmn == 'Darumacho de Galar (Normale)'].assign(
+    nom_pkmn='Darumacho de Galar (Transe)',
+    nom_pkmn_us='Galarian Darmanitan (Zen)',
+    type_2='Feu',
+    url_image='/images/a/a6/Sprite_0555_Galar_Transe_HOME.png',
+    attaque=160,
+    vitesse=135
+)
+
+
+#
+##
 ### N.609 Lugulabre
 df.loc[df.nom_pkmn == 'Lugulabre', ['talent_1', 'talent_2', 'talent_cache']] = [
     'Torche', 'Corps Ardent', 'Marque Ombre (gen 5) / Infiltration (gen 6:)'
@@ -403,6 +437,24 @@ demeteros_totemique = df.loc[df.nom_pkmn == 'Démétéros (Avatar)'].assign(
 )
 
 
+
+#
+##
+### N.648 Meloetta
+# Modification de la forme existante en Forme Chant
+df.loc[df.nom_pkmn == 'Meloetta', ['nom_pkmn', 'nom_pkmn_us']] = [
+    'Meloetta (Forme Chant)', 'Meloetta (Aria Forme)']
+
+# Ajout de la Forme Danse
+meloetta_danse = df.loc[df.nom_pkmn == 'Meloetta (Chant)'].assign(
+    nom_pkmn='Meloetta (Danse)',
+    nom_pkmn_us='Meloetta (Pirouette)',
+    url_image='/images/3/3a/Meloetta_%28Forme_Danse%29-N2B2.png',
+    type_1='Normal', type_2='Combat',
+    attaque=128, defense=90, attaque_speciale=77, defense_speciale=77, vitesse=128
+)
+
+
 #
 ##
 ### N.658 Amphinobi
@@ -434,6 +486,19 @@ mistigrix_femelle = df.loc[df.nom_pkmn == 'Mistigrix (♂)'].assign(
 )
 
 
+#
+##
+### N.682 Exagide
+# Modification de la forme existante en Forme Parade
+df.loc[df.nom_pkmn == 'Exagide', ['nom_pkmn', 'nom_pkmn_us', 'defense', 'defense_speciale']] = [
+    'Exagide (Parade)', 'Aegislash (Shield)', 140, 140]
+
+# Ajout de la Forme Assaut
+exagide_assaut = df.loc[df.nom_pkmn == 'Exagide (Parade)'].assign(
+    nom_pkmn='Exagide (Assaut)', nom_pkmn_us='Aegislash (Blade)',
+    url_image='/images/4/44/Exagide_%28Forme_Assaut%29-XY.png',
+    attaque=140, defense=50, attaque_speciale=140, defense_speciale=50
+)
 #
 ##
 ### N.710 Pitrouille
@@ -606,6 +671,45 @@ lougaroc_crepusculaire = df.loc[df.nom_pkmn == 'Lougaroc (Diurne)'].assign(
 )
 
 
+#
+##
+### N.741 Plumeline
+#
+##
+### N.741 Plumeline
+# Modification de la forme existante en Style Flamenco
+df.loc[df.nom_pkmn == 'Plumeline', [
+    'nom_pkmn', 'nom_pkmn_us', 'url_image', 'type_1', 'type_2'
+]] = [
+    'Plumeline (Flamenco)', 'Oricorio (Baile Style)', 
+    '/images/0/00/Plumeline_%28Style_Flamenco%29-SL.png',
+    'Feu', 'Vol'
+]
+
+# Ajout de la forme Pom-Pom
+plumeline_pompom = df.loc[df.nom_pkmn == 'Plumeline (Flamenco)'].assign(
+    nom_pkmn='Plumeline (Pom-Pom)',nom_pkmn_us='Oricorio (Pom-Pom)',
+    type_1='Électrik',
+    url_image='/images/4/45/Plumeline_%28Style_Pom-Pom%29-SL.png',
+    url_cri='/images/7/75/Cri_0741_Pom-Pom_HOME.ogg'
+)
+
+# Ajout de la forme Hula
+plumeline_hula = df.loc[df.nom_pkmn == 'Plumeline (Flamenco)'].assign(
+    nom_pkmn='Plumeline (Hula)',nom_pkmn_us="Oricorio (Pa'u)",
+    type_1='Psy',
+    url_image='/images/f/fb/Plumeline_%28Style_Hula%29-SL.png',
+    url_cri='/images/a/a1/Cri_0741_Hula_HOME.ogg'
+)
+
+# Ajout de la forme Buyō
+plumeline_buyo = df.loc[df.nom_pkmn == 'Plumeline (Flamenco)'].assign(
+    nom_pkmn='Plumeline (Buyō)', nom_pkmn_us='Oricorio (Sensu)',
+    type_1='Spectre',
+    url_image='/images/a/ae/Plumeline_%28Style_Buyō%29-SL.png',
+    url_cri='/images/e/ea/Cri_0741_Buy%C5%8D_HOME.ogg'
+)
+
 
 #
 ##
@@ -735,6 +839,49 @@ zamazenta_bouclier_supreme = zamazenta_heros_aguerri.assign(
     poids_kg=785.0,
     defense=145, defense_speciale=145, vitesse=128
 )
+
+
+#
+##
+### N.892 Shifours
+# Modification de la forme existante en Style Poing Final
+df.loc[df.nom_pkmn == 'Shifours', [
+    'nom_pkmn', 'nom_pkmn_us', 'type_1','type_2', 'url_image'
+]] = [
+    'Shifours (Style Poing Final)', 'Urshifu (Single Strike)', 
+    'Combat','Ténèbres', 
+    '/images/7/73/Shifours_%28Style_Poing_Final%29-EB.png'
+]
+
+# Ajout de la forme Style Mille Poings
+shifours_mille_poings = df.loc[df.nom_pkmn == 'Shifours (Style Poing Final)'].assign(
+    nom_pkmn='Shifours (Style Mille Poings)',
+    nom_pkmn_us='Urshifu (Rapid Strike)',
+    type_2='Eau',
+    url_image='/images/a/ac/Shifours_%28Style_Mille_Poings%29-EB.png',
+    url_cri='/images/8/88/Cri_0892_Mille_Poings_HOME.ogg'
+)
+
+# Changements forme Gigamax
+
+df.loc[df.nom_pkmn == 'Shifours Gigamax', [
+    'nom_pkmn', 'nom_pkmn_us', 'type_1','type_2', 'url_image', 'taille_m'
+]] = [
+    'Shifours Gigamax(Style Poing Final)', 'Urshifu (Single Strike)', 
+    'Combat','Ténèbres', 
+    '/images/8/8c/Shifours_Gigamax_%28Style_Poing_Final%29-EB.png',
+    29.0
+]
+
+shifours_gigamax_mille_poings = df.loc[df.nom_pkmn == 'Shifours Gigamax (Style Poing Final)'].assign(
+    nom_pkmn='Shifours Gigamax (Style Mille Poings)',
+    nom_pkmn_us='Urshifu (Rapid Strike)',
+    type_2='Eau',
+    url_image='/images/8/8c/Shifours_Gigamax_%28Style_Poing_Final%29-EB.png',
+    url_cri='/images/6/69/Cri_0892_Gigamax_Mille_Poings_HOME.ogg',
+    taille_m=26.0
+)
+
 
 
 #
@@ -969,6 +1116,7 @@ terapagos_stellaire = terapagos_normale.assign(
 df = pd.concat([
     df, 
     tauros_race_combattive, tauros_race_flamboyante, tauros_race_aquatique, 
+    mewtwo_blinde,
     morpheo_solaire, morpheo_eau_de_pluie, morpheo_blizzard, 
     deoxys_attaque, deoxys_defense, deoxys_vitesse, 
     cheniti_cape_sable, cheniti_cape_dechet, cheniselle_cape_plante, cheniselle_cape_dechet, 
@@ -976,19 +1124,22 @@ df = pd.concat([
     dialga_normale, dialga_originelle, palkia_normale, palkia_originelle, giratina_alternative, giratina_originelle, 
     shaymin_terrestre, shaymin_celeste, 
     bargantua_motif_rouge, bargantua_motif_bleu, 
+    darumacho_transe, darumacho_galar_transe,
     boreas_totemique, fulguris_totemique, demeteros_totemique, 
-    amphinobi_sacha, 
-    mistigrix_femelle, 
+    meloetta_danse, amphinobi_sacha, 
+    mistigrix_femelle, exagide_assaut, 
     pitrouille_mini, pitrouille_normale, pitrouille_maxi, pitrouille_ultra, 
     banshitrouye_mini, banshitrouye_normale, banshitrouye_maxi, banshitrouye_ultra, 
     zygarde_10, zygarde_50, zygarde_parfaite, 
     hoopa_enchaine, hoopa_dechaine, 
     lougaroc_nocturne, lougaroc_crepusculaire, 
+    plumeline_pompom, plumeline_hula, plumeline_buyo,
     froussardine_solitaire, froussardine_banc, 
     meteno_meteore, meteno_noyau, 
     salarsen_grave, wimessir_femelle, 
     zacian_heros_aguerri, zacian_epee_supreme, zamazenta_heros_aguerri, zamazenta_bouclier_supreme, 
     ursaking_normale, ursaking_lune_vermeille, 
+    shifours_mille_poings, shifours_gigamax_mille_poings,
     amovenus_totemique, fragrouin_femelle, 
     famignol_famille_de_trois, famignol_famille_de_quatre, 
     superdofin_ordinaire, superdofin_super, 
@@ -998,4 +1149,4 @@ df = pd.concat([
     terapagos_normale, terapagos_teracristal, terapagos_stellaire], ignore_index=True)
 
 
-df.to_csv('../../B___Data/CSV/pokemons.csv')
+df.to_csv('../../B___Data/CSV/pokemons_v2.csv')
