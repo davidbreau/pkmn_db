@@ -1,5 +1,7 @@
 # Lors du scrap, certaines exceptions n'ont pas vu leurs talents leurs formes correctement scrapés ou  (env. 100 sur 1051)
 # Ce script sert à les insérer à la main
+import sys
+sys.path.append('../..')
 from B___Data.connectors import Test_Database as Pkmn_Database
 from B___Data.pokemon import Pokemon
 

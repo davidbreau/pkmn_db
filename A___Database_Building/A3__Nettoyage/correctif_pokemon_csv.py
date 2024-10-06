@@ -1,7 +1,8 @@
 # Lors du scrap, certaines exceptions n'ont pas vu leurs talents leurs formes correctement scrapés ou  (env. 100 sur 1051)
 # Ce script sert à les insérer à la main
 
-import pandas as pd
+import pandas as pd, sys
+sys.path.append('../..')
 
 df = pd.read_csv('../../B___Data/CSV/pokemons.csv')
 
