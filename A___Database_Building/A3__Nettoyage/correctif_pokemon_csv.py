@@ -2,7 +2,8 @@
 # Ce script sert à les insérer à la main
 
 import pandas as pd, sys
-sys.path.append('../..')
+if '../..' not in sys.path:
+    sys.path.append('../..')
 
 df = pd.read_csv('../../B___Data/CSV/pokemons.csv')
 

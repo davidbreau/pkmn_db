@@ -26,8 +26,12 @@ class Database:
         self.connect()  # Assurez-vous que la connexion est ouverte
         self.cursor.execute(f"SELECT COUNT(*) FROM {table_name}")
         count = self.cursor.fetchone()[0]
+        self.close()
         return count
     
-    
-    
-    
+    def execute(self, query):
+        """Exécute une requête SQL."""
+        self.connect()  # Assurez-vous que la connexion est ouverte
+        self.cursor.execute(query)
+        self.connection.commit()
+        self.close()

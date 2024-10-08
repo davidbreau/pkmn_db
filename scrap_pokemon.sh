@@ -11,3 +11,5 @@ echo "$(pwd)"
 scrapy crawl PokemonSpider
 
 cd ../../..
+
+deactivate

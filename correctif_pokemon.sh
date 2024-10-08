@@ -16,8 +16,8 @@ cd B___Data || exit 1  # Quitte le script si le changement de répertoire échou
 
 # Exécuter un script Python en ligne pour compter les Pokémon
 TOTAL_POKEMONS=$(python3 -c "
-from pokemon import Pokemon
-print(Pokemon.count_all())
+from pokemon import Pokemon; from database import Database; db = Database('pkmn.db'); 
+print(Pokemon.count_all(db))
 " | tr -d '[:space:]')  # Supprime les espaces et les nouvelles lignes
 
 # Revenir au répertoire d'origine
@@ -28,8 +28,12 @@ echo "Total Pokémon: $TOTAL_POKEMONS"
 # Vérifiez si le nombre total de Pokémon est égal à 1150
 if [ "$TOTAL_POKEMONS" -lt 1155 ]; then
     echo "Exécution du script SQL..."
+    cd A___Database_Building/A3__Nettoyage
+    echo "$(pwd)"
     # Placez ici le code que vous souhaitez exécuter
-    python3 A___Database_Building/A3__Nettoyage/correctif_pokemon_sql.py  # Exécutez votre script SQL
+    python3 correctif_pokemon_sql.py  # Exécutez votre script SQL
+    cd ../..
+    echo "$(pwd)"
 else
     echo "Aucune action effectuée."
 fi
@@ -38,9 +42,10 @@ fi
 
 # Vérification de l'existence du fichier pokemons-v2
 if [ ! -f "$POKEMONS_V2_FILE" ]; then
+    cd A___Database_Building/A3__Nettoyage
     echo "Le fichier pokemons-v2 n'existe pas. Exécution de correctif_pokemon_csv.py..."
-    python3 A___Database_Building/A3__Nettoyage/correctif_pokemon_csv.py
-
+    python3 correctif_pokemon_csv.py
+    cd ../..
 else
     echo "Le fichier pokemons-v2 existe. Pas besoin d'exécuter correctif_pokemon_csv.py."
 fi

@@ -1,5 +1,4 @@
 from typing import List; from io import BytesIO; from PIL import Image; from IPython.display import display 
-from database import Database
 import requests, os, sqlite3; 
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "True"; import pygame
 
@@ -8,7 +7,7 @@ class Pokemon:
     A class representing a Pokémon and managing associated CRUD operations.
     """
 
-    def __init__(self, db: Database, nom_pkmn: str):
+    def __init__(self, db, nom_pkmn: str):
         """
         Initialize a Pokémon object and load its data from the database.
 
@@ -44,7 +43,7 @@ class Pokemon:
         return self._data
 
     @classmethod
-    def create(cls, db: Database, nom_pkmn: str, **kwargs):
+    def create(cls, db, nom_pkmn: str, **kwargs):
         """Create a new Pokémon in the database."""
         db.connect()  # Établir la connexion
         try:
@@ -90,7 +89,7 @@ class Pokemon:
         return self.create(self.db, **data)
 
     @classmethod
-    def read_all(cls, db: Database) -> List[str]:
+    def read_all(cls, db) -> List[str]:
         """Retrieve all Pokémon names from the database."""
         db.connect()  # Établir la connexion
         try:
@@ -136,7 +135,7 @@ class Pokemon:
             raise ValueError("L'URL du cri n'est pas disponible.")
             
     @classmethod
-    def count_all(cls, db: Database) -> int:
+    def count_all(cls, db) -> int:
         """Count the number of Pokémon in the database."""
         db.connect()  # Établir la connexion
         try:
@@ -149,7 +148,7 @@ class Pokemon:
 
 def main():
     """Main function to demonstrate functionality."""
-    db = Database('tests_pkmn.db')  # Créez l'instance de Database
+    db = sqlite3.connect('tests_pkmn.db')  # Créez l'instance de Database
     total_pokemons = Pokemon.count_all(db)
     print(f"Total Pokémon: {total_pokemons}")
 
