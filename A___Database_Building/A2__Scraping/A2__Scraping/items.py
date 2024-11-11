@@ -27,4 +27,9 @@ class pokemonItem(scrapy.Item):
     defense = scrapy.Field()
     defense_speciale = scrapy.Field()
     vitesse = scrapy.Field()
+
     
+class evolutionItem(scrapy.Item):
+    pre_evolution = scrapy.Field()
+    evolution = scrapy.Field()
+    condition = scrapy.Field()

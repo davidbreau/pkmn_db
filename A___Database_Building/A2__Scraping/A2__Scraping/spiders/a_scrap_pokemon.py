@@ -8,6 +8,11 @@ class PokemonSpider(CrawlSpider):
     name = "PokemonSpider"
     allowed_domains = ["www.pokepedia.fr"]
     
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'A2__Scraping.pipelines.PkmnPipeline': 300,  # Activer uniquement EvolutionPipeline
+        }
+    }
     
 ###🔽 Prends la page web la liste des monstres    
     def start_requests(self):
